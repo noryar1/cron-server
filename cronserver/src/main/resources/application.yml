@@ -1,0 +1,54 @@
+server:
+  port: 9180
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  mvc:
+    static-path-pattern: /static/**
+    date-format: yyyy-MM-dd HH:mm:ss
+
+############ jdbc ###########
+  datasource:
+    url: jdbc:mysql://localhost:3305/timer_server?useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 100
+      minimum-idle: 20
+      pool-name: DatebookHikariCP
+      max-lifetime: 600000
+      connection-timeout: 30000
+      idle-timeout: 30000
+
+# Specify the DBMS
+  jpa:
+    database: MYSQL
+# Show or not log for each sql query
+    show-sql: false
+# Hibernate ddl auto (create, create-drop, update)
+    hibernate:
+      ddl-auto: update
+# stripped before adding them to the entity manager)
+      dialect: org.hibernate.dialect.MySQL5Dialect
+
+# dubbo
+  dubbo:
+    application:
+      name: timer-server
+    registry:
+      address: zookeeper://192.168.0.186:2181
+    protocol:
+      name: dubbo
+      port: 20880
+    scan: org.noryar.timer.register.serivce.impl

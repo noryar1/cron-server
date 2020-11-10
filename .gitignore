@@ -1,5 +1,11 @@
+# idea file
+.idea
+*.iml
+
 # Compiled class file
 *.class
+cronserver/target
+api/target
 
 # Log file
 *.log
